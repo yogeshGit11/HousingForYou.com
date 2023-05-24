@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body style="background-image: url('{% static "images/bghome.jpg" %}')";>
+    
+</body>
+{% endblock body %}
+
+{% block homepage %}
+ <div class="col-sm-6">
+        <div class='mt-3 ms-4 intro'>
+            <h3 class='fw-bold headtext'>WE HAVE BROUGHT SHELTER FOR YOU</h3>
+            <h4 class='fw-bold exptext'>Explore Different Houses and Flats</h4>
+            {% if request.user.is_authenticated %}
+            <div>
+                <strong class=' text-dark alert-warning p-2 border border-1 border-dark'> Welcome, {{request.user.get_full_name}} <i class="fa-solid fa-face-smile" style="color: #25cb7d;"></i></strong><br>
+            </div>
+            {% endif %}
+            <div class='mt-3 p-1 me-2 textdiv shadow'>
+                <strong class='desctext'>No matter what ‘home’ means to you, there is surely something nostalgic about the place we call home. It’s the place where we eat, the place with friends and family, where we enjoy our home goods and decor, and it’s the place we make our own. Sometimes in life we could use a little reminder of how it feels to be home, to come home, and to leave home. Whether your loved ones are leaving home, coming home or seem to be missing home, these home sweet home quotes will remind them of all the good things (think unconditional love and mama’s cooking.) </strong>
+            </div>
+        </div>
+
+        <div class='ms-1 mt-1 visitlink'>
+            <a class="nav-link fw-bold text-danger ms-1" href={% url 'HouseOnRent' %}><i class="fa-solid fa-house"></i> <u>VIEW HOUSES FOR RENT</u></a>
+
+            <a class="nav-link fw-bold text-danger ms-1 " href={% url 'HouseOnSale' %}><i class="fa-solid fa-house-user"></i> <u>VIEW HOUSES FOR SALE</u></a>
+        </div>
+
+        <div class='mt-3 links'>
+            
+            <a href={% url 'PublishHouseOnRent' %} class='ms-4 alert-info'><i class="fa-solid fa-square-arrow-up-right"></i> <i>Publish Your Room/Flat For Rent</i></a> <br>
+
+            <a href={% url 'PublishHouseOnSale' %} class='ms-4 alert-primary'><i class="fa-solid fa-square-arrow-up-right"></i> <i>Publish Your Room/Flat For Sale</i></a><br>
+
+            {% if request.user.is_authenticated %}
+            
+            <a href={% url 'OwnerActivities' %} class='btn btn-primary ms-4 mt-2'><i class="fa-solid fa-user"></i> My Activities </a> <br>
+
+
+            {% endif %}
+
+            {% if request.user.is_superuser %}
+            
+            <a href={% url 'AdminUserActivity' %} class='btn btn-dark ms-4 mt-2'><i class="fa-solid fa-pen-to-square"></i> Manage Data</a> <br>
+
+            {% endif %}
+
+        </div>
+        
+    </div> 
+{% endblock homepage %}

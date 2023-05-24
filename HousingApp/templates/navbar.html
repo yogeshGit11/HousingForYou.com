@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg bg-dark fixed-top border border-1 ">
+  
+    <span class="navbar-brand domainname fw-bold " ><i>HosingForYou.com</i></span>
+
+ <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      <i class="fa-solid fa-sliders fa-2xl" style="color: #f9fafa;"></i>
+    </button> 
+ 
+  
+    <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item active">
+          <a class="nav-link fw-bold text-light" href={% url 'homepage' %}>HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href={% url 'HouseOnRent' %}>HOUSES FOR RENT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href={% url 'HouseOnSale' %}>HOUSES FOR SALE</a>
+        </li>
+
+        
+
+         {% if request.user.is_authenticated %}
+
+         <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href={% url 'OwnerActivities' %}><i class="fa-solid fa-user"></i> MY ACTIVITY ({{request.user.username}})</a>
+        </li>
+
+        {% if request.user.is_superuser %}
+        <li class="nav-item">
+          <a href={% url 'AdminUserActivity' %} class='nav-link fw-bold text-warning'><i class="fa-solid fa-pen-to-square"></i> Manage Data</a> 
+        </li>
+        {% endif %}
+
+         <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href={% url 'LogoutUser' %}><i class="fa-solid fa-right-to-bracket"></i> LOGOUT</a>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href={% url 'LoginUser' %}><i class="fa-solid fa-right-to-bracket"></i> LOGIN</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link fw-bold text-light" href={% url 'RegisterUser' %}><i class="fa-regular fa-address-card"></i> REGISTER</a>
+          </li>
+         {% endif %}
+
+      </ul>
+    </div>
+  </nav>
+  

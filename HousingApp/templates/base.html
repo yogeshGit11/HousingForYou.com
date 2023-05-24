@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href={% static 'images/home.png' %} />
+    <title>Housing For You</title>
+    <link rel="stylesheet" href={% static 'css/bootstrap.css' %}>
+    <link rel="stylesheet" href={% static '/css/style.css' %}>
+    <script src={% static 'js/font.js' %}></script>
+ 
+</head>
+{% block body %}
+<body>
+{% endblock body %}
+
+{% include 'navbar.html' %}
+
+<div class='main'>
+    {% block homepage %}
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+{% endblock homepage %}
+
+{% block heading %}
+    <div class="conatiner">
+        <div class="row">
+
+        </div>
+    </div>
+{% endblock heading %}
+
+{% block filtering %}
+<div class="conatiner">
+    <div class="row">
+
+    </div>
+</div>
+{% endblock filtering %}
+
+{% block housedata %}
+<div class="conatiner">
+    <div class="row">
+
+    </div>
+</div>
+{% endblock housedata %}
+
+{% block PublishHouse %}
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+{% endblock PublishHouse %}
+
+
+{% block AuthUser %}
+    <div class="container">
+        <div class="row">
+            
+        </div>
+    </div>
+{% endblock AuthUser %}
+
+{% block OwnerActivities %}
+
+
+{% endblock OwnerActivities %}
+
+{% block UpdateRentHouse %}
+<div class="container">
+    <div class="row">
+        
+    </div>
+</div>
+{% endblock UpdateRentHouse %}
+
+{% block UpdateSaleHouse %}
+<div class="container">
+    <div class="row">
+        
+    </div>
+</div>
+{% endblock UpdateSaleHouse %}
+</div>
+
+<script src={% static 'js/bootstrap.bundle.min.js' %}></script>
+
+</body>
+
+</html>

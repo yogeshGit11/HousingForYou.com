@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <body class='alert-danger' style="background-image: url('{% static "images/rent.jpg" %}')";>
+{% endblock body %}
+
+{% block heading %}
+    <div class="col-sm-12">
+        <h2 class='bg-danger text-center mt-2 headtxt text-dark'>HOUSES ON RENT</h2>
+    </div>
+{% endblock heading %}
+
+{% block filtering %}
+    <div class="col-sm-10">       
+            
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class='me-5'> 
+                        <form action="{% url 'userchoiceRentRooms' %}" method='post' >
+                            {% csrf_token %}
+                            <select name="userchoice" class="form-control">
+                                <option value="" selected>YOU ARE LOOKING FOR</option>
+                                <option value="1-BHK">1-BHK</option>
+                            <option value="2-BHK">2-BHK</option>
+                            <option value="3-BHK">3-BHK</option>
+                            <option value="4-BHK">4-BHK</option>
+                            <option value="Single Room">Single Room</option>
+                            <option value="Double Room">Double Room</option>
+                            <option value="Bungalow">Bungalow</option>
+                            <option value="Shop">Shop</option>
+                            <option value="View All">View All</option>
+                            </select>           
+                                <input type="submit" value='Search' class='btn btn-primary btn-sm mt-1 '>
+                        </form>     
+                    </div>
+                </div>
+
+
+                <div class="col-sm-2 offset-7 ">
+                    <div class=''> 
+                        <form action="{% url 'userchoiceCityRentRooms' %}" method='POST' > {% csrf_token %}
+
+                            <input type="text" name="cityname" class='form-control' placeholder='Search by city' required autocomplete="off">
+
+                            <input type="submit" value="Search" class='btn btn-outline-dark btn-sm mt-1 fw-bold'>
+                        </form>  
+                    </div>
+                </div>
+
+            </div>
+        </div>
+            
+    </div>
+
+
+
+{% endblock filtering %}
+
+
+{% block housedata %}
+    {% if houses %}
+        {% for house in houses %}
+        <div class="col-sm-12 p-3">
+            <div class='alert-primary  border border-1 border-dark text-dark'>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4 p-3">
+                                <img src="{{house.house_photos.url}}" height='300px' width='450px'class='border border-4 border-dark'>
+                            </div>
+                            <div class="col-sm-8">
+                                
+                                <strong>About The House:-</strong>
+                                <p>{{house.about_house}}</p>
+                                <strong>House Type: {{house.house_type}}</strong><br>
+                                <strong>Location:-</strong> <p>{{house.house_location}}</p>
+                                <strong>House Rent:- {{house.house_rent}}/month</strong> <br>
+                                <strong>Owner Name:- {{house.Owner_name}}</strong> <br>
+                                <strong>Contact No:- </strong><a href="tel:{{house.contact_number}}"><strong>{{house.contact_number}}</strong></a><br>
+                                <strong>Email:- <a href = "mailto: {{house.user_name.email}}">{{house.user_name.email}}</a></strong><br>
+                                <small><i>Published On: {{house.publish_date}}</i></small>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    
+        {% endfor %}
+        {% else %}
+        <center>
+            <div class="col-sm-8 m-4">
+                <div class="alert alert-dark text-dark text-center" role="alert">
+                    <strong>THERE IS NO HOUSE AND FLATS PUBLISHED YET FOR RENT ABOUT YOU ARE LOOKING FOR</strong>
+                    <p><a href={% url 'PublishHouseOnRent' %} class='fw-bold'> Click Here</a> to publish {% if request.user.is_authenticated == 0 %}<a href={% url 'LoginUser' %} class='fw-bold'>(login required)</a>{% endif %}</p>
+                  </div>
+            </div>
+        </center>
+    {% endif %}
+    
+        <div class='col-sm-4 offset-6'>
+            {% if is_paginated %}
+                <nav aria-label="Page navigation">
+    <ul class="pagination">
+
+      {% if page_obj.has_previous %}
+      <li class="page-item ">
+        <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      {% endif %}
+
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">{{page_obj.number}}</a>
+      </li>
+      
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </nav> 
+    {% endif %}
+        </div>
+
+{% endblock housedata %}
+

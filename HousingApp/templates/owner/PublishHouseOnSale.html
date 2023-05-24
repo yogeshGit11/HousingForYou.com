@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <body class='alert-danger' style="background-image: url('{% static "images/rent.jpg" %}')";>
+        
+  
+{% endblock body %}
+
+{% block PublishHouse %}
+
+        <div class='col-sm-6'>
+            <div class="m-3 alert-primary p-1 border border-2 border-dark">
+                <h2 class='bg-dark mt-1 text-light text-center rounded-pill'>PUBLISH YOUR HOUSE FOR SALE</h2>
+            <div class='m-4 form-group'>
+                
+                <center>
+                    <div class="col-sm-5 m-1 text-center">
+                        {% if messages %}
+                            {% for message in messages %}
+                        <div class="alert alert-warning" role="alert">
+                        <strong>{{message}}</strong>
+                        </div>
+                            {% endfor %}
+                    {% endif %}
+                    </div>
+                </center>
+
+                <form method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for fm in form %} 
+                    <strong class='text-dark'>{{fm.label_tag}}</strong> {{fm}} <strong class='text-danger'>{{fm.errors|striptags}}</strong>
+                    {% endfor %}
+                    <input type="submit" value='publish' class='btn btn-success mt-2 offset-5'> 
+                </form>
+            </div>
+            </div>
+        </div>
+        
+
+{% endblock PublishHouse %}

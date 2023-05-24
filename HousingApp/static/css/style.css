@@ -1,0 +1,72 @@
+body {
+    background-size: 1800px 900px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+}
+.main{
+    margin-top: 80px;
+}
+
+.headtext{
+    font-family: Comic Sans MS;
+    font-size: 36px;
+    color: rgb(211, 7, 197);
+}
+
+.exptext{
+    font-family: Colonna MT;
+    font-size: 40px;
+    color: rgb(68, 135, 8);
+}
+
+.headtxt{
+    font-family: Palatino Linotype;
+    font-weight: bold;
+    font-size: 35px;
+    border-radius: 15px;
+    margin: 10px;
+}
+.desctext{
+    font-family: Trebuchet MS;
+    color: rgb(14, 13, 13);
+    margin-top: 10px;
+}
+
+.textdiv{
+    
+    border-radius: 10px;
+    background-color: rgb(166, 132, 234);
+}
+
+.domainname{
+    font-size: 35px;
+    font-family: Verdana;
+    color: lightgreen;
+}
+
+.navbar-nav > li{
+    margin-left:20px;
+    margin-right:20px;
+  }
+
+.links{
+    color: rgb(83, 226, 43);
+    font-size: 25px;
+    font-family: Sitka Text;
+    font-weight: bold;
+    
+  }
+.nav-item:hover{
+    border: 1px solid white;
+}
+
+a:hover{
+    background-color: rgb(168, 144, 174);
+}
+
+.rguser{
+    background-color: rgb(2, 2, 2);
+    border: 2px solid dark;
+    border-radius: 15px;
+}

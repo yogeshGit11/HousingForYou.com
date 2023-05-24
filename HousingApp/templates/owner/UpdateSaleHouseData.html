@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <body class='alert-danger' style="background-image: url('{% static "images/rent.jpg" %}')";>
+{% endblock body %}
+
+
+
+
+{% block UpdateSaleHouse %}
+        <center>
+            <div class="col-sm-5">
+            <h2 class='text-light bg-dark m-2'>UPDATE HOUSE INFORMATION(SALE)</h2>
+            
+                <div class='bg-info text-dark border border-2 border-dark m-2 p-2 rounded-3'>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for fm in form %}
+                            <strong>{{fm.label_tag}}</strong> {{fm}} {{fm.errors|striptags}}
+                        {% endfor %}
+                        <input type="submit" value="Update" class='btn btn-success mt-2'>
+                    </form>
+                </div>
+                
+            </div>
+        </center>
+{% endblock UpdateSaleHouse %}
