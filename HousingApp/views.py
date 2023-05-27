@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class HomePage(TemplateView):
     template_name='home.html'
@@ -118,6 +119,23 @@ def RemoveSaleHouse(request,id):
         house=HouseOnSell.objects.get(pk=id)
         house.delete()
         return HttpResponseRedirect('/MyActivities')
+    
+class ViewOwnerDetails(ListView):
+     model=User
+     context_object_name='users'
+     template_name='OwnerDetails.html'
+
+def VisitOwnerData(request,owner):
+     RentHouses=HouseOnRent.objects.filter(user_name__username=owner)
+     SellHouses=HouseOnSell.objects.filter(user_name__username=owner)
+
+     return render(request,'VisitOwnerData.html',{'renthouse':RentHouses,'salehouse':SellHouses,'username':owner})
+
+def DeleteOwner(request,id):
+    if request.method=='POST':
+        user=User.objects.get(pk=id)
+        user.delete()
+        return HttpResponseRedirect('/ViewOwnerDetails')
 
 #-----SECURITY------
 

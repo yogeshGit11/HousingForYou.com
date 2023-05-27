@@ -22,6 +22,9 @@ urlpatterns = [
 
     path('RemoveRentHouseInfo/<int:id>',views.RemoveRentHouse,name='RemoveRentHouse'),
     path('RemoveSaleHouseInfo/<int:id>',views.RemoveSaleHouse,name='RemoveSaleHouse'),
+    path('ViewOwnerDetails/',views.ViewOwnerDetails.as_view(),name='ViewOwnerDetails'),
+    path('VisitOwnerData/<str:owner>',views.VisitOwnerData,name='VisitOwnerData'),
+    path('DeleteOwner/<int:id>',views.DeleteOwner,name='DeleteOwner'),
 
     path('RegisterUser/',views.RegisterUser.as_view(),name='RegisterUser'),
     path('LoginUser/',views.LoginUser.as_view(),name='LoginUser'),

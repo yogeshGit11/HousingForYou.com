@@ -7,7 +7,7 @@
 
 {% block heading %}
     <div class="col-sm-12">
-        <h1 class='text-dark bg-warning text-center headtxt'>MY ACTIVITIES</h1>
+        <h1 class='text-dark alert-danger border border-1 border-dark text-center headtxt'><i class="fa-solid fa-house"></i> PUBLISHED BY <span class='text-primary'>{{username}}</span></h1>
     </div>
 {% endblock heading %}
 
@@ -16,47 +16,10 @@
 <div class="conatiner">
     <div class="row">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5">
-
-                        <div class="col-sm-7 alert-primary p-2 m-2 border border-2 border-dark">
-                            <table>
-                                <tr>
-                                    <td><strong class='fs-5'>NAME : {{request.user.get_full_name}} </strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong class='fs-5'>EMAIL : {{request.user.email}}</strong></td> 
-                                </tr>
-                            </table>
-                        </div>
-                </div>
-                <div class="col-sm-4 ms-2">
-                    <a href={% url 'PublishHouseOnRent' %} class='bg-light fw-bold'><i class="fa-solid fa-square-arrow-up-right"></i> <i>Publish Your Room/Flat For Rent</i></a> <br>
-
-                    <a href={% url 'PublishHouseOnSale' %} class='bg-light fw-bold'><i class="fa-solid fa-square-arrow-up-right"></i> <i>Publish Your Room/Flat For Sale</i></a>
-                </div>
-                
-                </div>
-            </div>
-        </div>
-        <center>
-            <div class="col-sm-6">
-                <div class="text-center">
-                    {% if messages %}
-                        {% for message in messages %}
-                    <div class="alert bg-success text-light" role="alert">
-                    <strong>{{message}}</strong>
-                    </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-        </center>
         
-        {% if rentdata or selldata %}
+        {% if renthouse or salehouse %}
 
-        {% for house in rentdata %}
+        {% for house in renthouse %}
         <div class="col-sm-12 p-3">
             <div class='bg-dark'>
                     <div class="container-fluid">
@@ -82,7 +45,6 @@
                                 <div class="row">
                                     <div class="col-sm-3 pb-1 ">
                                     
-                                    <a href={% url 'UpdateRentHouse' house.id %} class='btn btn-sm btn-warning'><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                         
                                     <form action="{% url 'RemoveRentHouse' house.id %}" method='post' class='d-inline' onsubmit="return confirm('Are You Sure To Remove ?')">
                                         {% csrf_token %}
@@ -103,7 +65,7 @@
         {% endfor %}
 
 
-        {% for house in selldata %}
+        {% for house in salehouse %}
         <div class="col-sm-12 p-3">
             <div class='bg-dark'>
                     <div class="container-fluid">
@@ -127,7 +89,6 @@
                                 {% if user.is_superuser or  request.user.is_authenticated  %}
                                 <div class="row">
                                     <div class="col-sm-3 pb-1 ">
-                                        <a href={% url 'UpdateSaleHouse' house.id %} class='btn btn-sm btn-warning'><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
                                         <form action="{% url 'RemoveSaleHouse' house.id %}" method='post' class='d-inline' onsubmit="return confirm('Are You Sure To Remove ?')">
                                             {% csrf_token %}
@@ -151,7 +112,7 @@
         <center>
             <div class="col-sm-8 m-4">
                 <div class="alert bg-dark text-light text-center" role="alert">
-                    <strong>NO HOUSE AND FLATS PUBLISHED BY YOU. USE ABOVE LINKS TO PUBLISH.</strong>
+                    <strong>NO HOUSE AND FLATS PUBLISHED BY {{username}}.</strong>
                   </div>
             </div>
         </center>

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body style="background-image: url('{% static "images/ownerbg.jpg" %}')";>
+    
+</body>
+{% endblock body %}
+
+{% block OwnerDetails %}
+ 
+   <div class="col-sm-10">
+    <h1 class='text-dark bg-info mt-2 text-center offset-2 rounded-pill'>ALL OWNERS DETAILS</h1>
+
+    <div class="col-sm-10">
+
+        {% if users %}
+        
+
+            <div class='alert-danger offset-4 border-dark border-2'>
+                <table class="table table-bordered border-dark border-2">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>View Owner Data</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+    
+                      {% for user in users %}
+                      
+                      <tr>
+                        <th>{{user.id}}</th>
+                        <td>{{user.username}}</td>
+                        <td>{{user.first_name}}</td>
+                        <td>{{user.last_name}}</td>
+                        <td><a href = "mailto: {{user.email}}">{{user.email}}</a></td>
+                        <td><a href={% url 'VisitOwnerData' user.username %}>View Data</a></td>
+                        <td>
+                            {% if user.username == 'AdminUser' %}
+                                <center><h5>X</h5></center>
+    
+                            {% else %}
+                            <form action="{% url 'DeleteOwner' user.id %}" method='post' class='d-inline' onsubmit="return confirm('Are You Sure To Remove {{user.username}} ?')">
+                                {% csrf_token %}
+                                
+                                <button type='submit' class='btn btn-danger btn-sm'>
+                                    <i class="fa-solid fa-trash"></i> Delete</button>
+    
+                            </form>
+                            {% endif %}
+                        </td>
+                        
+                      </tr>
+                      
+                      {% endfor %}
+                      
+                    </tbody>
+                  </table>
+                  
+            </div>
+
+        
+        {% endif %}
+
+    </div>
+
+   </div>
+
+{% endblock OwnerDetails %}
